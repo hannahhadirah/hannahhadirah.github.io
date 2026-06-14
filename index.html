@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Portfolio | Nurul Hannah Hadirah | A216430</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #2e7d32;
+    --primary-light: #4caf50;
+    --primary-dark: #1b5e20;
+    --accent: #81c784;
+    --bg: #f1f8e9;
+    --card-bg: #ffffff;
+    --text: #212121;
+    --text-light: #555555;
+    --border: #c8e6c9;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--primary-dark);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    flex-wrap: wrap; gap: 8px;
+  }
+  .nav-brand { color: #fff; font-size: 1.1rem; font-weight: 700; padding: 14px 0; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 4px; }
+  .nav-links a {
+    color: #c8e6c9; text-decoration: none;
+    padding: 8px 14px; border-radius: 20px;
+    font-size: 0.9rem; transition: all 0.2s;
+  }
+  .nav-links a:hover { background: var(--primary-light); color: #fff; }
+  header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%);
+    color: #fff; text-align: center; padding: 80px 24px 60px;
+  }
+  .avatar {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: var(--accent); display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; margin: 0 auto 20px; border: 4px solid #fff;
+  }
+  header h1 { font-size: 2rem; margin-bottom: 6px; }
+  header p.sub { font-size: 1rem; opacity: 0.85; margin-bottom: 4px; }
+  .sdg-badge {
+    display: inline-block; background: var(--accent); color: var(--primary-dark);
+    padding: 6px 18px; border-radius: 20px; font-weight: 700;
+    margin-top: 14px; font-size: 0.9rem;
+  }
+  .sdg-statement {
+    display: block; margin-top: 10px;
+    font-size: 0.92rem; opacity: 0.9; font-style: italic;
+  }
+  .intro-box {
+    max-width: 700px; margin: 24px auto 0;
+    background: rgba(255,255,255,0.15); border-radius: 12px;
+    padding: 18px 24px; font-size: 0.97rem; line-height: 1.8;
+  }
+  section { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-size: 1.6rem; color: var(--primary-dark);
+    border-left: 5px solid var(--primary-light);
+    padding-left: 14px; margin-bottom: 32px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .card {
+    background: var(--card-bg); border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border: 1px solid var(--border); overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.13); }
+  .card-header {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    color: #fff; padding: 16px 20px;
+  }
+  .card-header h3 { font-size: 1.1rem; }
+  .card-header p { font-size: 0.82rem; opacity: 0.88; margin-top: 2px; }
+  .card-body { padding: 18px 20px; }
+  .thumb-link { text-decoration: none; display: block; margin-bottom: 14px; }
+  .thumb-wrap { position: relative; border-radius: 10px; overflow: hidden; }
+  .thumb-wrap img { width: 100%; display: block; border-radius: 10px; }
+  .play-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.35); border-radius: 10px;
+    transition: background 0.2s;
+  }
+  .thumb-link:hover .play-overlay { background: rgba(0,0,0,0.55); }
+  .play-circle {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #ff0000; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 8px;
+  }
+  .play-circle svg { width: 28px; height: 28px; fill: #fff; margin-left: 4px; }
+  .play-label { color: #fff; font-size: 0.85rem; font-weight: 600; background: rgba(0,0,0,0.5); padding: 4px 12px; border-radius: 12px; }
+  .reflection {
+    background: #f9fbe7; border-left: 4px solid var(--accent);
+    padding: 12px 14px; border-radius: 8px;
+    font-size: 0.88rem; color: var(--text-light); line-height: 1.7;
+  }
+  .reflection-label { font-weight: 700; color: var(--primary); font-size: 0.8rem; margin-bottom: 5px; }
+  .btn {
+    display: inline-block; margin-top: 14px;
+    background: var(--primary); color: #fff;
+    padding: 9px 20px; border-radius: 20px;
+    text-decoration: none; font-size: 0.88rem; font-weight: 600;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--primary-dark); }
+  .problem-box {
+    background: #e8f5e9; border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 14px;
+    font-size: 0.87rem; color: var(--text-light);
+  }
+  .problem-box strong { color: var(--primary-dark); }
+  .reflection-full {
+    background: var(--card-bg); border-radius: 16px;
+    padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+  .reflection-full p { margin-bottom: 14px; color: var(--text-light); }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .skill-chip {
+    background: var(--primary); color: #fff;
+    padding: 8px 18px; border-radius: 20px;
+    font-size: 0.88rem; font-weight: 600;
+  }
+  .resource-list { list-style: none; }
+  .resource-list li {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 18px; margin-bottom: 10px;
+    font-size: 0.92rem; color: var(--text-light);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .resource-list li::before { content: "🔗"; font-size: 1rem; margin-top: 2px; }
+  .resource-list a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  .resource-list a:hover { text-decoration: underline; }
+  .ai-note {
+    background: #fff8e1; border: 1px solid #ffe082;
+    border-radius: 10px; padding: 12px 18px; margin-bottom: 10px;
+    font-size: 0.88rem; color: #5d4037;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .ai-note::before { content: "🤖"; font-size: 1rem; margin-top: 2px; }
+  footer {
+    background: var(--primary-dark); color: #c8e6c9;
+    text-align: center; padding: 28px 24px;
+    font-size: 0.9rem; margin-top: 40px;
+  }
+  footer strong { color: #fff; }
+  .section-divider { border: none; border-top: 2px solid var(--border); margin: 0; }
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.4rem; }
+    .section-title { font-size: 1.3rem; }
+    nav { padding: 0 12px; }
+    .nav-links a { padding: 6px 10px; font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-brand">🌿 Hannah's e-Portfolio</div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#labs">Labs</a>
+    <a href="#projects">Projects</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#skills">Skills</a>
+    <a href="#resources">Resources</a>
+  </div>
+</nav>
+<header id="home">
+  <div class="avatar">👩‍💻</div>
+  <h1>Nurul Hannah Hadirah Binti Mohd Zakaria</h1>
+  <p class="sub">A216430 &nbsp;|&nbsp; Software Engineering &nbsp;|&nbsp; Instructor: Mr. Nelson Sana</p>
+  <div class="sdg-badge">🌍 SDG 12: Responsible Consumption and Production</div>
+  <span class="sdg-statement">"Food waste is still a big issue and I want to use technology to help people manage food better and reduce wastage."</span>
+  <div class="intro-box">
+    I am a Software Engineering student who is interested in mobile application development. Throughout this course, I have learned how to build and design mobile apps using Jetpack Compose and integrate different modern technologies such as local database, cloud database, API and sensor features. My main goal is to improve my skills in building fully functional mobile applications that are not only working but also solve real world problems.
+  </div>
+</header>
+<hr class="section-divider">
+<section id="labs">
+  <h2 class="section-title">📚 Lab Submissions</h2>
+  <div class="grid">
+<!-- Lab 1 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Lab 1 — UI Design</h3>
+    <p>Building basic user interfaces with Jetpack Compose</p>
+  </div>
+  <div class="card-body">
+    <a href="https://youtu.be/2xpEtKRTwB4" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/2xpEtKRTwB4/hqdefault.jpg" alt="Lab 1 UI Design thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflection</div>
+      In this lab, I learned the basic structure of Jetpack Compose and how to build simple user interfaces using composable functions. It helped me understand how UI is built in Android.
+    </div>
+  </div>
+</div>
+
+<!-- Lab 2 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Lab 2 — Interaction</h3>
+    <p>User input, state management and dynamic UI updates</p>
+  </div>
+  <div class="card-body">
+    <a href="https://youtu.be/r1caYfUwzmY" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/r1caYfUwzmY/hqdefault.jpg" alt="Lab 2 Interaction thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflection</div>
+      In this lab, I learned how user input and button clicks work. I also learned how state changes can update the UI automatically.
+    </div>
+  </div>
+</div>
+
+<!-- Lab 3 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Lab 3 — Material Design</h3>
+    <p>Applying themes, typography and consistent color schemes</p>
+  </div>
+  <div class="card-body">
+    <a href="https://youtu.be/qNW4VmEiTks" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/qNW4VmEiTks/hqdefault.jpg" alt="Lab 3 Material Design thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflection</div>
+      This lab helped me understand how to make my app look more clean and consistent using Material Design principles like colors, spacing and typography.
+    </div>
+  </div>
+</div>
+
+<!-- Lab 4 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Lab 4 — Navigation</h3>
+    <p>Multi-screen navigation using Navigation Component</p>
+  </div>
+  <div class="card-body">
+    <a href="https://youtu.be/PwvkS5VFaX4" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/PwvkS5VFaX4/hqdefault.jpg" alt="Lab 4 Navigation thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflection</div>
+      In this lab, I learned how to connect multiple screens using Navigation Component. This helped me build multi-screen applications in a more structured way.
+    </div>
+  </div>
+</div>
+
+<!-- Lab 5 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Lab 5 — Room Database</h3>
+    <p>Local data persistence using Room with DAO and Repository</p>
+  </div>
+  <div class="card-body">
+    <a href="https://youtu.be/CWntKl5iv5w" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/CWntKl5iv5w/hqdefault.jpg" alt="Lab 5 Room Database thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Reflection</div>
+      In this lab, I learned how to store data locally using Room Database. I understood how to insert, update, delete and retrieve data even without internet.
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+<hr class="section-divider">
+<section id="projects">
+  <h2 class="section-title">🚀 Project Submissions</h2>
+  <div class="grid">
+<!-- Project 1 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Project 1 — FreshKeeper</h3>
+    <p>Multi-screen food tracking app with navigation & local storage</p>
+  </div>
+  <div class="card-body">
+    <div class="problem-box">
+      <strong>Problem:</strong> Food waste happens when people do not track their food expiry properly and end up throwing away food that is still edible.<br><br>
+      <strong>Solution:</strong> Basic food tracking system with simple navigation and local storage.
+    </div>
+    <a href="https://youtu.be/2Jovy7LmpHk" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/2Jovy7LmpHk/hqdefault.jpg" alt="Project 1 VSR thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch VSR on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Lessons Learned</div>
+      I learned how to structure an Android application and connect different screens using navigation. I also improved my understanding of UI and basic data handling.
+    </div>
+    <a href="https://github.com/hannahhadirah/A216430_HannahHadirah_DrNelson_Project1" class="btn" target="_blank">View on GitHub</a>
+  </div>
+</div>
+
+<!-- Project 2 -->
+<div class="card">
+  <div class="card-header">
+    <h3>Project 2 — FreshKeeper Enhanced</h3>
+    <p>Full-stack app with Room, Firebase, Retrofit API & GPS sensor</p>
+  </div>
+  <div class="card-body">
+    <div class="problem-box">
+      <strong>Problem:</strong> Food waste is still happening a lot because people forget expiry dates and do not manage food properly at home.<br><br>
+      <strong>Solution:</strong> This app helps users track food, check expiry status, get recipes using API, and donate extra food using Firebase. It also uses GPS to help users find nearby food donation centres.
+    </div>
+    <a href="https://youtu.be/lm60nyt57J8" target="_blank" class="thumb-link">
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/lm60nyt57J8/hqdefault.jpg" alt="Project 2 VSR thumbnail">
+        <div class="play-overlay">
+          <div class="play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <span class="play-label">▶ Watch VSR on YouTube</span>
+        </div>
+      </div>
+    </a>
+    <div class="reflection">
+      <div class="reflection-label">💬 Lessons Learned</div>
+      In this project, I learned how to combine Room Database, Firebase, Retrofit API and GPS sensor into one full application. It was challenging but I gained a lot of experience in building real world mobile apps.
+    </div>
+    <a href="https://github.com/hannahhadirah/A216430_HannahHadirah_DrNelson_Project2.git" class="btn" target="_blank">View on GitHub</a>
+  </div>
+</div>
+  </div>
+</section>
+<hr class="section-divider">
+<section id="reflection">
+  <h2 class="section-title">💭 Reflection & Learning Journey</h2>
+  <div class="reflection-full">
+    <p>From Lab 1 until Project 2, I can clearly see my improvement in mobile development. At first, I only knew basic UI design but now I can build a full application with database, API and sensor features.</p>
+    <p>The most difficult part was integrating Firebase and API because it required proper understanding of data flow. However, through practice, I managed to solve it.</p>
+    <p>Overall, this course helped me understand how real mobile applications are built and how technology can be used to solve real world problems like food waste.</p>
+    <p>This journey also taught me that SDG 12 — Responsible Consumption and Production — is something technology can genuinely support. FreshKeeper is proof that a simple mobile app can encourage better habits, reduce waste, and even connect communities through food sharing.</p>
+  </div>
+</section>
+<hr class="section-divider">
+<section id="skills">
+  <h2 class="section-title">🛠️ Skills & Tech Stack</h2>
+  <div class="skills-grid">
+    <span class="skill-chip">Kotlin</span>
+    <span class="skill-chip">Jetpack Compose</span>
+    <span class="skill-chip">Room Database</span>
+    <span class="skill-chip">Firebase Firestore</span>
+    <span class="skill-chip">Retrofit API</span>
+    <span class="skill-chip">Navigation Component</span>
+    <span class="skill-chip">Google Maps API</span>
+    <span class="skill-chip">GPS Location</span>
+    <span class="skill-chip">Android Studio</span>
+    <span class="skill-chip">GitHub</span>
+    <span class="skill-chip">ViewModel</span>
+    <span class="skill-chip">StateFlow</span>
+    <span class="skill-chip">Material Design 3</span>
+    <span class="skill-chip">MVVM Architecture</span>
+  </div>
+</section>
+<hr class="section-divider">
+<section id="resources">
+  <h2 class="section-title">📖 Resources & References</h2>
+  <ul class="resource-list">
+    <li><a href="https://www.themealdb.com" target="_blank">TheMealDB API</a> — Free public REST API used for recipe suggestions based on food ingredients.</li>
+    <li><a href="https://firebase.google.com" target="_blank">Firebase Documentation</a> — Official Firebase docs used to implement Firestore cloud database.</li>
+    <li><a href="https://developer.android.com" target="_blank">Android Developer Guide</a> — Official Android documentation for Room, Navigation, Compose and Sensors.</li>
+    <li>Google Maps API — Used for GPS location and finding nearby food donation centres.</li>
+    <li>Lecture Notes — Mobile Programming course materials provided by Mr. Nelson Sana.</li>
+  </ul>
+  <div style="margin-top: 16px;">
+    <p style="font-size:0.88rem; font-weight:700; color:var(--primary-dark); margin-bottom:10px;">🤖 AI Assistance Acknowledgement</p>
+    <div class="ai-note">
+      <div>
+        <strong>Claude by Anthropic</strong> — Used for debugging support, error resolution, and code structuring guidance. All code suggestions were reviewed, understood, and tested by me before implementation.
+      </div>
+    </div>
+    <div class="ai-note">
+      <div>
+        <strong>ChatGPT by OpenAI</strong> — Used as an additional debugging assistant during development. Helped with understanding error messages and alternative approaches. All outputs were critically reviewed and verified by me.
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <p><strong>Nurul Hannah Hadirah Binti Mohd Zakaria</strong> &nbsp;|&nbsp; A216430 &nbsp;|&nbsp; Software Engineering</p>
+  <p style="margin-top:6px;">Mobile Programming — TK2323/TM2213 &nbsp;|&nbsp; Instructor: Mr. Nelson Sana &nbsp;|&nbsp; &copy; 2026</p>
+  <p style="margin-top:8px; font-size:0.82rem; opacity:0.7;">🌍 SDG 12: Responsible Consumption and Production</p>
+</footer>
+</body>
+</html>
